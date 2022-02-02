@@ -104,4 +104,14 @@ public class ResidentDAO {
 
 	}
 
+	public int delete(Integer id) throws SQLException {
+
+		try (PreparedStatement pStmt = conn.prepareStatement("DELETE FROM residents WHERE id = ?")) {
+			pStmt.setInt(1, id);
+			int affectedRows = pStmt.executeUpdate();
+			return affectedRows;
+		}
+		
+	}
+
 }

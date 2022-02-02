@@ -5,6 +5,8 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Optional;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.devinhouse.village.config.ConnectionJDBC;
@@ -149,6 +151,29 @@ public class ResidentService {
 			} else {
 				return null;
 			}
+		}
+
+	}
+
+	public ResponseEntity<HttpStatus> delete(Integer id) throws SQLException {
+		if (id == null) {
+			throw new IllegalArgumentException("Id inválido!");
+		}
+
+		int affectedRows = 0;
+		try (Connection conn = new ConnectionJDBC().getConnection()) {
+			try {
+				affectedRows = new ResidentDAO(conn).delete(id);
+
+			} catch (SQLException e) {
+				conn.rollback();
+				e.printStackTrace();
+			}
+		}
+		if (affectedRows > 0) {
+			return ResponseEntity.accepted().build();
+		} else {
+			return ResponseEntity.badRequest().build();
 		}
 
 	}
