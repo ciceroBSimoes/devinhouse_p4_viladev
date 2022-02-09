@@ -4,18 +4,18 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class Resident {
-	
+
 	private Integer id;
 	private String name;
 	private String surname;
 	private Date birthDate;
 	private BigDecimal income;
 	private String cpf;
-	
+
 	public Resident() {
-	
+
 	}
-	
+
 	public Resident(Integer id, String name, String surname, Date birthDate, BigDecimal income, String cpf) {
 		this.id = id;
 		this.name = name;
@@ -74,5 +74,5 @@ public class Resident {
 		return "Resident [id=" + id + ", name=" + name + ", surname=" + surname + ", birthDate=" + birthDate
 				+ ", income=" + income + ", cpf=" + cpf + "]";
 	}
-	
+
 }

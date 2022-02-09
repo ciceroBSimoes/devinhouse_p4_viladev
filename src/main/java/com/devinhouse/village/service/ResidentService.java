@@ -181,17 +181,13 @@ public class ResidentService {
 	public ResponseEntity<HttpStatus> create(ResidentDTO resident) throws SQLException {
 		int generatedId = 0;
 
-		//LocalDate ld = resident.getBirthDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		//System.out.println(ld);
-		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		
-		
+
 		if (!resident.getName().matches("[a-zA-Zá-úÁ-Ú]+") || !resident.getSurname().matches("[a-zA-Zá-úÁ-Ú]+")) {
 			throw new IllegalArgumentException("Nome e Sobrenome só podem conter letras!");
 
-		} else if (!GenericValidator.isDate(simpleDateFormat.format(resident.getBirthDate()),"yyyy-MM-dd", true)) {
-			
+		} else if (!GenericValidator.isDate(simpleDateFormat.format(resident.getBirthDate()), "yyyy-MM-dd", true)) {
+
 			throw new IllegalArgumentException("Formato de data inválido, tente: yyyy-MM-dd");
 
 		} else if (!GenericValidator.isDouble(resident.getIncome().toString())) {
